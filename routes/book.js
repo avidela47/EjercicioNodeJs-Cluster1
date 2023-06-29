@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {bookController} = require('../controllers');
+const { bookController } = require('../controllers');
 const { jwtValidMDW, userIsAdminMDW } = require('../middleware/authMdw');
 
 router.post('/', userIsAdminMDW, bookController.createBook)

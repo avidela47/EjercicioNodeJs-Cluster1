@@ -1,8 +1,7 @@
 const express = require('express');
 const app = express();
 const bookFile = 'book.json';
-const { bookRouter, userRouter, authRouter } = require('./routes');
-const logginMdw = require('./middleware/logging');
+const { bookRouter, userRouter, authRouter, libraryRouter } = require('./routes');
 const { initializeDB } = require('./config/dbConfig');
 
 
@@ -12,17 +11,17 @@ const PORT = process.env.PORT || 8080;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(logginMdw);
 
 // Ruta - Home
 app.get('/', (req, res, next) => {
   res.send('<h1>Ejercicio NodeJS - Cluster 1</h1>')
 });
 
-// Rutas - Libros - Usuarios - Login
+// Rutas - Libros - Usuarios - Login - Librerias
 app.use('/book', bookRouter);
 app.use('/user', userRouter);
 app.use('/login', authRouter);
+app.use('/library', libraryRouter);
 
 //
 const errorHandler = (err, req, res, next) => {

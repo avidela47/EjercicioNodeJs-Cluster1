@@ -20,16 +20,17 @@ const getUserId = async (userId) => {
     }
 };
 
-const validateUser = async (options) => {
+const validateUser = async (user, pass) => {
     try {
-        const user = await User.findAll({
+        console.log(user, pass)
+        const users = await User.findOne({
             where: {
-                email: options.user,
-                password: options.pass,
+                email: user,
+                password: pass,
             },
         });
-        if (user.length !== 0) {
-            return user;
+        if (users) {
+            return users;
         }
         return false;
     } catch (err) {

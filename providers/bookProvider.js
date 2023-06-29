@@ -10,4 +10,14 @@ const createBook = async (book) => {
     }
 };
 
-module.exports = { createBook };
+const getBookId = async (bookId) => {
+    try {
+        const book = await Book.findByPk(bookId);
+        return book;
+    } catch (err) {
+        console.error("Error when encontrar Book", err);
+        throw err;
+    }
+};
+
+module.exports = { createBook, getBookId };
