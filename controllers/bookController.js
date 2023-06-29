@@ -9,8 +9,17 @@ const createBook = async (req, res) => {
     }
 };
 
-const getBooks = (req, res) => {
-    
+const getBook = async (req, res) => {
+    try {
+        const books = await bookService.getBook(req.params.getBook);
+        if (!books) {
+            res.status(404).json({ action: 'get books', error: `Books not found` });
+        } else {
+            res.json(books);
+        }
+    } catch (err) {
+        res.status(500).json({ action: 'get books', error: err.message });
+    }
 };
 
 const getBookId = async (req, res) => {
@@ -19,7 +28,7 @@ const getBookId = async (req, res) => {
         if (book) {
             res.json(book);
         } else {
-            res.status(404).json({ action: ' found book', msg: 'Libro no encontrado' });
+            res.status(404).json({ action: 'found book', msg: 'Libro no encontrado' });
         }
         
     } catch (err) {
@@ -27,14 +36,30 @@ const getBookId = async (req, res) => {
     }
 };
 
-const putBook = (req, res) => {
-    console.log(`Book found with id ${req.params.bookId}`);
-    res.json({ id: req.params.bookId, ...req.body });
+const putBook = async (req, res) => {
+    try {
+        const book = await bookService.putBook(req.params.putBook);
+        if (!book) {
+            res.status(404).json({ action: 'put bookID', error: `User not found` });
+        } else {
+            res.json(book);
+        }
+    } catch (err) {
+        res.status(500).json({ action: 'put bookID', error: err.message });
+    }
 };
 
-const deleteBook = (req, res) => {
-    console.log(`Book found with id ${req.params.bookId}`);
-    res.json({ id: req.params.bookId, ...req.body });
+const deleteBook = async (req, res) => {
+    try {
+        const book = await bookService.deleteBook(req.params.deleteBook);
+        if (!book) {
+            res.status(404).json({ action: 'delete bookID', error: `User not found` });
+        } else {
+            res.json(book);
+        }
+    } catch (err) {
+        res.status(500).json({ action: 'delete bookID', error: err.message });
+    }
 };
 
-module.exports = { createBook, getBooks, getBookId, putBook, deleteBook };
+module.exports = { createBook, getBook, getBookId, putBook, deleteBook };

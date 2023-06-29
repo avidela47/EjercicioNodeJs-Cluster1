@@ -9,8 +9,17 @@ const createLibrary = async (req, res) => {
     }
 };
 
-const getLibrary = (req, res) => {
-
+const getLibrary = async (req, res) => {
+    try {
+        const librarys = await libraryService.getLibrary(req.params.getLibrary);
+        if (!librarys) {
+            res.status(404).json({ action: 'get librarys', error: `Books not found` });
+        } else {
+            res.json(librarys);
+        }
+    } catch (err) {
+        res.status(500).json({ action: 'get librarys', error: err.message });
+    }
 };
 
 const getLibraryId = async (req, res) => {
@@ -26,12 +35,30 @@ const getLibraryId = async (req, res) => {
     }
 };
 
-const putLibrary = (req, res) => {
-    
+const putLibrary = async (req, res) => {
+    try {
+        const library = await libraryService.putLibrary(req.params.putLibrary);
+        if (!library) {
+            res.status(404).json({ action: 'put libraryID', error: `User not found` });
+        } else {
+            res.json(library);
+        }
+    } catch (err) {
+        res.status(500).json({ action: 'put libraryID', error: err.message });
+    }
 };
 
-const deleteLibrary = (req, res) => {
-    
+const deleteLibrary = async (req, res) => {
+    try {
+        const library = await libraryService.deleteLibrary(req.params.deleteLibrary);
+        if (!library) {
+            res.status(404).json({ action: 'delete libraryID', error: `Library not found` });
+        } else {
+            res.json(library);
+        }
+    } catch (err) {
+        res.status(500).json({ action: 'delete userID', error: err.message });
+    }
 };
 
 module.exports = { createLibrary, getLibrary, getLibraryId, putLibrary, deleteLibrary };

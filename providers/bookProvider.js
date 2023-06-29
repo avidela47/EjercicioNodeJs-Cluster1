@@ -10,14 +10,44 @@ const createBook = async (book) => {
     }
 };
 
-const getBookId = async (bookId) => {
+const getBook = async () => {
     try {
-        const book = await Book.findByPk(bookId);
-        return book;
+        const books = await Book.findAll( { include: { all: true } });
+        return books;
     } catch (err) {
-        console.error("Error when encontrar Book", err);
+        console.error("Error when fetching Books", err);
         throw err;
     }
 };
 
-module.exports = { createBook, getBookId };
+const getBookId = async (bookId) => {
+    try {
+        const book = await Book.findByPk(bookId, { include: { all: true } });
+        return book;
+    } catch (err) {
+        console.error("Error when fetching GetBook", err);
+        throw err;
+    }
+};
+
+const putBook = async (bookID) => {
+    try {
+        const book = await Book.update(bookID, { include: { all: true } });
+        return book;
+    } catch (err) {
+        console.error("Error when fetching PutBook", err);
+        throw err;
+    }
+};
+
+const deleteBook = async (bookID) => {
+    try {
+        const book = await Book.destroy(bookID, { include: { all: true } });
+        return book;
+    } catch (err) {
+        console.error("Error when fetching DeleteBook", err);
+        throw err;
+    }
+};
+
+module.exports = { createBook, getBook, getBookId, putBook, deleteBook };

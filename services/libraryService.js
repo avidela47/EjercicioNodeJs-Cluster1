@@ -1,18 +1,27 @@
-const { libraryService } = require("../services");
+const { libraryProvider } = require("../providers");
 
-const createLibrary = async (req, res) => {
-    try {
-        console.log(`Library created by user with role ${req.library.role}`);
-        const newLibrary = await libraryService.createLibrary(req.params.library, req.body);
-        res.json(newLibrary);
-    } catch (err) {
-        res.status(400).json({ action: "createLibrary", error: err.message });
-    }
+const createLibrary = async (library) => {
+    return await libraryProvider.createLibrary(library);
 };
 
-const getLibraryId = async (req, res) => {
-    console.log(`Library found with id ${req.params.libraryId}`);
-    res.json({ id: req.params.libraryId, name: "Lord of the rings" });
+const getLibrary =  async (librarys) => {
+    const library = await libraryProvider.getLibrary(librarys);
+    return library;
 };
 
-module.exports = { createLibrary, getLibraryId };
+const getLibraryId = async (libraryId) => {
+    const library = await libraryProvider.getLibraryId(libraryId);
+    return library;
+};
+
+const putLibrary =  async (libraryId) => {
+    const library = await libraryProvider.putLibrary(libraryId);
+    return library;
+ };
+
+ const deleteLibrary =  async (libraryId) => {
+    const library = await libraryProvider.deleteLibrary(libraryId);
+    return library;
+ };
+
+module.exports = { createLibrary, getLibrary, getLibraryId, putLibrary, deleteLibrary };

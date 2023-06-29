@@ -10,12 +10,42 @@ const createUser = async (user) => {
     }
 };
 
+const getUser = async () => {
+    try {
+        const users = await User.findAll( { include: { all: true } });
+        return users;
+    } catch (err) {
+        console.error("Error when fetching Users", err);
+        throw err;
+    }
+};
+
 const getUserId = async (userId) => {
     try {
         const user = await User.findByPk(userId, { include: { all: true } });
         return user;
     } catch (err) {
         console.error("Error when fetching User", err);
+        throw err;
+    }
+};
+
+const putUser = async (userID) => {
+    try {
+        const user = await User.update(userID, { include: { all: true } });
+        return user;
+    } catch (err) {
+        console.error("Error when fetching PutUser", err);
+        throw err;
+    }
+};
+
+const deleteUser = async (userID) => {
+    try {
+        const user = await User.destroy(userID, { include: { all: true } });
+        return user;
+    } catch (err) {
+        console.error("Error when fetching PutUser", err);
         throw err;
     }
 };
@@ -39,4 +69,4 @@ const validateUser = async (user, pass) => {
     }
 };
 
-module.exports = { createUser, getUserId, validateUser };
+module.exports = { createUser, getUser, getUserId, putUser, deleteUser, validateUser };

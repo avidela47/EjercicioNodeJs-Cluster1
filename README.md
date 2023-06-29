@@ -1,5 +1,3 @@
-![Ariel Videla](https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTC5T3nYPK13ied5NeDCSVZZnGifQkVLaiBLIMR5acCn34SLZrI)
-
 # Ejercicio Node Js
 
 ## Consigna:
@@ -27,6 +25,11 @@ La creación de un archivo dbconfig en un proyecto de Sequelize se realiza con e
 routes
 ```sh
 Se encuantran los archivos en el cual por medio de sus rutas de pueden realizar los diferentes metodos para realizar la CRUD a traves de las peticiones, estos archivos requieren de los controllers.
+```
+
+passport-jwt
+```sh
+Se agrega para dar los distintos niveles de permisos y autenticacion.
 ```
 
 controlers
