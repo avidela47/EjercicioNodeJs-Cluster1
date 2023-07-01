@@ -20,9 +20,15 @@ const Library = sequelize.define("Librarys", {
         type: DataTypes.NUMBER,
         allowNull: false,
     },
+}, {
+    paranoid: true,
 });
 
-Library.hasMany(Book);
-Book.belongsTo(Library);
+Library.hasMany(Book, {
+    foreignKey: 'library',
+});
+Book.belongsTo(Library, {
+    foreignKey: 'library',
+});
 
 module.exports = Library;

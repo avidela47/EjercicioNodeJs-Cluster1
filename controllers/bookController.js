@@ -11,7 +11,7 @@ const createBook = async (req, res) => {
 
 const getBook = async (req, res) => {
     try {
-        const books = await bookService.getBook(req.params.getBook);
+        const books = await bookService.getBook();
         if (!books) {
             res.status(404).json({ action: 'get books', error: `Books not found` });
         } else {
@@ -38,7 +38,7 @@ const getBookId = async (req, res) => {
 
 const putBook = async (req, res) => {
     try {
-        const book = await bookService.putBook(req.params.putBook);
+        const book = await bookService.putBook(req.params.bookId, req.body);
         if (!book) {
             res.status(404).json({ action: 'put bookID', error: `User not found` });
         } else {
@@ -51,7 +51,7 @@ const putBook = async (req, res) => {
 
 const deleteBook = async (req, res) => {
     try {
-        const book = await bookService.deleteBook(req.params.deleteBook);
+        const book = await bookService.deleteBook(req.params.bookId);
         if (!book) {
             res.status(404).json({ action: 'delete bookID', error: `User not found` });
         } else {

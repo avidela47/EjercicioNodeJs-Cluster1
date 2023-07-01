@@ -12,7 +12,7 @@ const createLibrary = async (library) => {
 
 const getLibrary = async () => {
     try {
-        const librarys = await Library.findAll( { include: { all: true } });
+        const librarys = await Library.findAll({ include: { all: true } });
         return librarys;
     } catch (err) {
         console.error("Error when fetching Librarys", err);
@@ -22,17 +22,29 @@ const getLibrary = async () => {
 
 const getLibraryId = async (libraryId) => {
     try {
-        const library = await Library.findByPk(libraryId, { include: { all: true } });
+        const library = await Library.findByPk(libraryId,
+            {
+                include: {
+                    all: true,
+                    attributes: ['id', 'isbn', 'title', 'author', 'year']
+                },
+                attributes: ['id', 'name', 'location', 'phone']
+            });
         return library;
     } catch (err) {
-        console.error("Error when fetching GetLibrary", err);
+        console.error("Error when fetching Library", err);
         throw err;
     }
+
 };
 
-const putLibrary = async (libraryId) => {
+const putLibrary = async (libraryId, libraryput) => {
     try {
-        const library = await Library.update(libraryId, { include: { all: true } });
+        const library = await Library.update((libraryput), {
+            where: {
+                id: libraryId,
+            }
+        });
         return library;
     } catch (err) {
         console.error("Error when fetching PutLibrary", err);
@@ -42,7 +54,11 @@ const putLibrary = async (libraryId) => {
 
 const deleteLibrary = async (libraryId) => {
     try {
-        const library = await Library.destroy(libraryId, { include: { all: true } });
+        const library = await Library.destroy({
+            where: {
+                id: libraryId,
+            }
+        });
         return library;
     } catch (err) {
         console.error("Error when fetching DeleteLibrary", err);

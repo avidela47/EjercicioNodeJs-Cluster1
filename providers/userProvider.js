@@ -12,7 +12,7 @@ const createUser = async (user) => {
 
 const getUser = async () => {
     try {
-        const users = await User.findAll( { include: { all: true } });
+        const users = await User.findAll({ include: { all: true } });
         return users;
     } catch (err) {
         console.error("Error when fetching Users", err);
@@ -30,29 +30,39 @@ const getUserId = async (userId) => {
     }
 };
 
-const putUser = async (userID) => {
+const putUser = async (userId, userput) => {
     try {
-        const user = await User.update(userID, { include: { all: true } });
+        await User.update((userput), {
+            where: {
+                id: userId,
+            }
+        });
+        const user = await User.findByPk(userId, { include: { all: true } });
         return user;
+
     } catch (err) {
         console.error("Error when fetching PutUser", err);
         throw err;
     }
 };
 
-const deleteUser = async (userID) => {
+const deleteUser = async (userId) => {
     try {
-        const user = await User.destroy(userID, { include: { all: true } });
+        const user = await User.destroy({
+            where: {
+                id: userId,
+            }
+        });
         return user;
     } catch (err) {
-        console.error("Error when fetching PutUser", err);
+        console.error("Error when fetching DeleteUser", err);
         throw err;
     }
 };
 
 const validateUser = async (user, pass) => {
     try {
-        console.log(user, pass)
+        console.log(user, pass);
         const users = await User.findOne({
             where: {
                 email: user,
@@ -61,12 +71,36 @@ const validateUser = async (user, pass) => {
         });
         if (users) {
             return users;
+        } else {
+            return false;
         }
-        return false;
     } catch (err) {
         console.error("Error when validating User", err);
         return false;
     }
 };
 
-module.exports = { createUser, getUser, getUserId, putUser, deleteUser, validateUser };
+const createAdmin = async () => {
+    try {
+        const userexit = await User.findOne({
+            where: {
+                email: "admin@gmail.com",
+            }
+
+        })
+        if (!userexit) {
+            const newUser = await User.create({
+                firstName: "Admin",
+                lastName: "Admin",
+                email: "admin@gmail.com",
+                password: "Admin"
+            });
+            return newUser;
+        }
+    } catch (err) {
+        console.error("Error when creating User", err);
+        throw err;
+    }
+};
+
+module.exports = { createUser, getUser, getUserId, putUser, deleteUser, validateUser, createAdmin };

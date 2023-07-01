@@ -4,9 +4,9 @@ const createUser =  async (user) => {
    return await userProvider.createUser(user);
 };
 
-const getUser =  async (users) => {
-   const user = await userProvider.getUser(users);
-   return user;
+const getUser =  async () => {
+   return await userProvider.getUser();
+   
 };
 
 const getUserId =  async (userId) => {
@@ -14,14 +14,14 @@ const getUserId =  async (userId) => {
    return user;
 };
 
-const putUser =  async (userId) => {
-   const user = await userProvider.putUser(userId);
-   return user;
+const putUser =  async (userId, userput) => {
+   return await userProvider.putUser(userId, userput);
+   
 };
 
 const deleteUser =  async (userId) => {
-   const user = await userProvider.deleteUser(userId);
-   return user;
+   return await userProvider.deleteUser(userId);
+   
 };
 
 const validateUser =  async (user, pass) => {

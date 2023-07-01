@@ -5,6 +5,20 @@ Crear una API REST que permita manejar librerías y los libros asociados a cada 
 las librerías. Utilizar Node.Js Express, Sequelize y Passport como la infraestructura para crear
 el servicio. Usar SQLlite como motor de base de datos.
 
+Clonar el ropositorio
+```sh
+https://github.com/avidela47/EjercicioNodeJs-Cluster1
+```
+
+Correr la aplicación en modo desarrollo
+```sh
+npm run dev
+```
+Interaccion a la Api
+```sh
+http://localhost:8090
+```
+
 ### Paso a paso creacion de la API y sus archivos.
 
 dependencias en el package.json instalando con NPM

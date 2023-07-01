@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { userController } = require('../controllers');
-// const { jwtValidMDW, userIsAdminMDW } = require('../middleware/authMdw');
+const { jwtValidMDW, userIsAdminMDW } = require('../middleware/authMdw.js');
 
-router.post('/', userController.createUser)
-      .get('/users', userController.getUser)
-      .get('/:userId', userController.getUserId)
-      .put('/:userId', userController.putUser)
-      .delete('/:userId', userController.deleteUser);
+router.post('/', jwtValidMDW, userIsAdminMDW, userController.createUser)
+      .get('/users', jwtValidMDW, userIsAdminMDW, userController.getUser)
+      .get('/:userId', jwtValidMDW, userIsAdminMDW, userController.getUserId)
+      .put('/:userId', jwtValidMDW, userIsAdminMDW, userController.putUser)
+      .delete('/:userId', jwtValidMDW, userIsAdminMDW, userController.deleteUser);
 
 module.exports = router;

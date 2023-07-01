@@ -37,7 +37,7 @@ const getLibraryId = async (req, res) => {
 
 const putLibrary = async (req, res) => {
     try {
-        const library = await libraryService.putLibrary(req.params.putLibrary);
+        const library = await libraryService.putLibrary(req.params.libraryId, req.body);
         if (!library) {
             res.status(404).json({ action: 'put libraryID', error: `User not found` });
         } else {
@@ -50,7 +50,7 @@ const putLibrary = async (req, res) => {
 
 const deleteLibrary = async (req, res) => {
     try {
-        const library = await libraryService.deleteLibrary(req.params.deleteLibrary);
+        const library = await libraryService.deleteLibrary(req.params.libraryId);
         if (!library) {
             res.status(404).json({ action: 'delete libraryID', error: `Library not found` });
         } else {

@@ -4,8 +4,8 @@ const createLibrary = async (library) => {
     return await libraryProvider.createLibrary(library);
 };
 
-const getLibrary =  async (librarys) => {
-    const library = await libraryProvider.getLibrary(librarys);
+const getLibrary =  async () => {
+    const library = await libraryProvider.getLibrary();
     return library;
 };
 
@@ -14,8 +14,8 @@ const getLibraryId = async (libraryId) => {
     return library;
 };
 
-const putLibrary =  async (libraryId) => {
-    const library = await libraryProvider.putLibrary(libraryId);
+const putLibrary =  async (libraryId, libraryput) => {
+    const library = await libraryProvider.putLibrary(libraryId, libraryput);
     return library;
  };
 

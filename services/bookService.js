@@ -4,8 +4,8 @@ const createBook =  async(book) => {
     return await bookProvider.createBook(book);
 };
 
-const getBook =  async (books) => {
-    const book = await bookProvider.getBook(books);
+const getBook =  async () => {
+    const book = await bookProvider.getBook();
     return book;
  };
 
@@ -14,8 +14,8 @@ const getBookId = async (bookId) => {
     return book;
 };
 
-const putBook =  async (bookId) => {
-    const book = await bookProvider.putBook(bookId);
+const putBook =  async (bookId, bookput) => {
+    const book = await bookProvider.putBook(bookId, bookput);
     return book;
  };
 

@@ -11,7 +11,7 @@ const createUser = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        const users = await userService.getUser(req.params.getUser);
+        const users = await userService.getUser();
         if (!users) {
             res.status(404).json({ action: 'get users', error: `Users not found` });
         } else {
@@ -37,11 +37,11 @@ const getUserId = async (req, res) => {
 
 const putUser = async (req, res) => {
     try {
-        const user = await userService.putUser(req.params.putUser);
-        if (!user) {
+        const userput = await userService.putUser(req.params.userId, req.body);
+        if (!userput) {
             res.status(404).json({ action: 'put userID', error: `User not found` });
         } else {
-            res.json(user);
+            res.json(userput);
         }
     } catch (err) {
         res.status(500).json({ action: 'put userID', error: err.message });
@@ -50,11 +50,11 @@ const putUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     try {
-        const user = await userService.deleteUser(req.params.deleteUser);
+        const user = await userService.deleteUser(req.params.userId);
         if (!user) {
             res.status(404).json({ action: 'delete userID', error: `User not found` });
         } else {
-            res.json(user);
+            res.json({ message: "User Deleted" });
         }
     } catch (err) {
         res.status(500).json({ action: 'delete userID', error: err.message });

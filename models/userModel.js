@@ -27,6 +27,8 @@ const User = sequelize.define("Users", {
         type: DataTypes.STRING,
         allowNull: false,
     },
+}, {
+    paranoid: true,
 });
 
 module.exports = User;

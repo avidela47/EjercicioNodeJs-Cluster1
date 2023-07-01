@@ -6,7 +6,6 @@ const { SERVER_SECRET } = require('../middleware/authMdw');
 
 router.post("/", async (req, res) => {
     const { user, pass } = req.body;
-    console.log(user, pass);
     if (user === "admin" && pass === "admin") {
         const token = jwt.sign({ user, role: "Admin" }, SERVER_SECRET, {});
         res.json({ token });
